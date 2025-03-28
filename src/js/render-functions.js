@@ -1,10 +1,12 @@
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+const gallery = document.querySelector('.gallery');
 
 let lightbox;
+createLightbox();
 
-export function renderMarkup(gallery, pictures) {
-  gallery = document.querySelector(".gallery");
+export function renderMarkup(pictures) {
   const markup = pictures
     .map(
       ({
@@ -45,18 +47,19 @@ export function renderMarkup(gallery, pictures) {
                 </li>`;
       }
     )
-    .join("");
+    .join('');
 
-  gallery.insertAdjacentHTML("beforeend", markup);
+  gallery.insertAdjacentHTML('beforeend', markup);
+}
 
-  lightbox = new SimpleLightbox(".gallery-link", {
-    captionsData: "alt",
+function createLightbox() {
+  lightbox = new SimpleLightbox('.gallery-link', {
+    captionsData: 'alt',
     captionDelay: 250,
   });
   lightbox.refresh();
 }
 
-export function clearGallery(gallery) {
-  gallery = document.querySelector(".gallery");
-  gallery.innerHTML = "";
+export function clearGallery() {
+  gallery.innerHTML = '';
 }

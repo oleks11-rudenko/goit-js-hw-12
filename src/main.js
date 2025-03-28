@@ -22,12 +22,14 @@ async function onSumbit(event) {
   event.preventDefault();
   request = event.currentTarget[0].value.trim();
 
+  page = 1;
   const form = event.currentTarget;
 
   refs.loadMoreButton.classList.add('hidden');
   refs.loader.classList.remove('hidden');
 
   if (!request) {
+    refs.loader.classList.add('hidden');
     iziToast.warning({
       message: 'Sorry, there are no keywords. Please enter them.',
       position: 'topRight',
@@ -61,7 +63,7 @@ async function onSumbit(event) {
       });
       return;
     }
-    renderMarkup(refs.gallery, hits);
+    renderMarkup(hits);
     refs.loadMoreButton.classList.remove('hidden');
 
     if (page * perPage >= totalHits) {
@@ -87,7 +89,7 @@ async function loadMorePictures() {
   try {
     const { hits, totalHits } = await requestData(request, page, perPage);
 
-    renderMarkup(refs.gallery, hits);
+    renderMarkup(hits);
     scrollPage();
 
     if (page * perPage >= totalHits) {
