@@ -68,7 +68,6 @@ async function onSumbit(event) {
       refs.loadMoreButton.classList.add('hidden');
       iziToast.warning({
         message: "We're sorry, but you've reached the end of search results.",
-        icon: '',
         position: 'topRight',
       });
     }
